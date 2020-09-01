@@ -5,7 +5,7 @@
 }
 
 #register-container {
-    max-width: 250px;
+    width: 350px;
     margin: 0 auto;
     padding: 16px;
 }
@@ -26,15 +26,39 @@
 }
 
 .container {
-    width: 768px;
+    width: 1024px;
     margin: 0 auto;
+}
+
+.error-container, .success-container {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+}
+
+.error-container {
+    border: 1px solid red;
+}
+
+.success-container {
+    border: 1px solid green;
+}
+
+.register-error {
+    color: red;
+}
+
+.register-success {
+    color: green;
 }
 
 .row {
     display: flex;
 }
 
-.col-12 {
+.col-6, .col-5 {
     flex-direction: column;
+}
+.col-12 {
     width: 100%;
 }
