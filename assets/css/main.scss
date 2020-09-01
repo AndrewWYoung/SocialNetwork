@@ -1,0 +1,40 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+#register-container {
+    max-width: 250px;
+    margin: 0 auto;
+    padding: 16px;
+}
+
+#register-form {
+    display: flex;
+    flex-direction: column;
+
+    input {
+        padding: 8px;
+        margin: 8px 0;
+    }
+
+    button {
+        padding: 8px;
+        margin: 8px 0;
+    }
+}
+
+.container {
+    width: 768px;
+    margin: 0 auto;
+}
+
+.row {
+    display: flex;
+}
+
+.col-12 {
+    flex-direction: column;
+    width: 100%;
+}
