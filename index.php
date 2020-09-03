@@ -4,7 +4,6 @@
 <div class="signup-form">
     <form id="register-form" action="./includes/register.inc.php" method="POST">
         <?php
-            session_start();
             if(isset($_SESSION['error'])) { ?>
                 <div class="error-container">
                     <ul>
@@ -33,5 +32,11 @@
         <input type="text" name="email" placeholder="Email">
         <button type="submit" name="register-submit">Sign up!</button>
     </form>
+
+    <?php
+        if (isset($_SESSION['username'])) {
+            echo '<p style="font-size: 2rem; color: white;">'.$_SESSION['username'].'</p>';
+        }
+    ?>
 <div class="container">
 <?php include "footer.php"; ?>
