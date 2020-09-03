@@ -5,10 +5,79 @@
   margin: 0;
 }
 
-#register-container {
-  width: 350px;
+body {
+  background-color: #2b3137;
+}
+
+ul {
+  padding-left: 32px;
+}
+
+.signup-form {
+  width: 450px;
+  height: 100vh;
   margin: 0 auto;
   padding: 16px;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.signup-form form {
+  background-color: white;
+  padding: 24px 32px;
+  border-radius: 5px;
+}
+
+.signup-form form button {
+  color: white;
+  background-color: #28a745;
+  border-color: #28a745;
+  border-style: solid;
+  border-radius: 5px;
+}
+
+.signup-form h2 {
+  font-size: 32px;
+  position: relative;
+  text-align: center;
+  margin: 16px 0;
+  letter-spacing: 1.25px;
+}
+
+.signup-form h2::before, .signup-form h2::after {
+  position: absolute;
+  content: "";
+  height: 1px;
+  width: 25%;
+  background: #d4d4d4;
+  position: absolute;
+  top: 50%;
+}
+
+.signup-form h2::before {
+  left: 0;
+}
+
+.signup-form h2::after {
+  right: 0;
+}
+
+.signup-form p {
+  color: #999;
+  margin-bottom: 24px;
+  text-align: center;
 }
 
 #register-form {
@@ -22,13 +91,14 @@
 }
 
 #register-form input {
-  padding: 8px;
+  padding: 16px;
   margin: 8px 0;
 }
 
 #register-form button {
-  padding: 8px;
+  padding: 16px;
   margin: 8px 0;
+  font-size: 1.15rem;
 }
 
 .container {
@@ -40,6 +110,7 @@
   width: 100%;
   padding: 8px;
   margin: 8px 0;
+  border-radius: 5px;
 }
 
 .error-container {
@@ -64,7 +135,7 @@
   display: flex;
 }
 
-.col-6, .col-5 {
+.col-1, .col-2, .col-6, .col-12 {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
