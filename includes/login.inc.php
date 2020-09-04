@@ -15,7 +15,7 @@
                 $_SESSION['email'] = $result[0]['email'];
                 $_SESSION['password'] = $result[0]['password'];
 
-                header("Location: ../index.php");
+                header("Location: ../profile.php");
             } else {
 
             }

@@ -47,11 +47,16 @@
             header("Location: ../index.php");
             exit();
         }
+
+        // Random profile cover
+        $directory = "../users/covers";
+        $covers    = scandir($directory);
+        $profile_cover = $covers[array_rand($covers)];
     
         // Create account
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $query = 'INSERT iNTO users (username, password, email) VALUES (:username, :password, :email);';
-        $values = array(':username'=>$username, ':password'=>$hashed_password, ':email'=>$email);
+        $query = 'INSERT iNTO users (username, password, email, profile_cover) VALUES (:username, :password, :email, :profile_cover);';
+        $values = array(':username'=>$username, ':password'=>$hashed_password, ':email'=>$email, ':profile_cover'=>$profile_cover);
         if (db::query($query, $values)) {
             $_SESSION['success'] = "User successfully added!";
             header("Location: ../index.php");

@@ -1,5 +1,15 @@
 <?php
     session_start();
+    if (isset($_SESSION['email'])) {
+        include "includes/db.inc.php";
+        $query = "SELECT * FROM users WHERE email=:email";
+        $values = array(':email'=>$_SESSION['email']);
+        $result = db::query($query, $values);
+        if ($result) {
+            $username = $result[0]['username'];
+            $profile_cover = $result[0]['profile_cover'];
+        }
+    }
 ?>
 
 <!DOCTYPE html>
