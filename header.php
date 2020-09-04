@@ -8,10 +8,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="./assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 </head>
 <body>
     <header>
+        <?php if (isset($_SESSION['invalid-credentials'])) { ?>
+            <div class="container-full bg-danger align-right">
+                <div class="container">
+                    <p>Email or Password is incorrect!</p>
+                </div>
+            </div>
+        <?php 
+            unset($_SESSION['invalid-credentials']);
+        } ?>
         <nav class="navbar navbar-dark">
             <a class="brand" href="#">SocialNetwork</a>
             <?php

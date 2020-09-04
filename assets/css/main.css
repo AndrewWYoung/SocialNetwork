@@ -7,6 +7,11 @@
 
 body {
   background-color: #2b3137;
+  font-size: 16px;
+}
+
+p {
+  padding: 4px 0;
 }
 
 a {
@@ -14,7 +19,9 @@ a {
 }
 
 nav {
-  padding: 16px 32px;
+  padding: 16px 0;
+  width: 1024px;
+  margin: 0 auto;
 }
 
 nav input {
@@ -111,6 +118,19 @@ ul {
   color: #999;
   margin-bottom: 24px;
   text-align: center;
+}
+
+.container-full {
+  width: 100%;
+}
+
+.bg-danger {
+  background-color: red;
+  color: white;
+}
+
+.align-right {
+  text-align: right;
 }
 
 #register-form {
