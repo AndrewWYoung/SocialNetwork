@@ -7,6 +7,8 @@
         $result = db::query($query, $values);
         if ($result) {
             $username = $result[0]['username'];
+            $email = $result[0]['email'];
+            $registration_date = $result[0]['registration_date'];
             $profile_cover = $result[0]['profile_cover'];
         }
     }
