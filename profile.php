@@ -14,25 +14,51 @@
             $result = db::query($query, $values);
 
             header("Location: profile.php");
+            exit();
         }
     }
 
     if (isset($_POST['content-submit'])) {
         $content = $_POST['content'];
+        $image   = $_FILES['image']['name'];
+        $image_tmp = $_FILES['image']['tmp_name'];
+        $directory = "users/posts/$image";
 
-        echo empty($content);
-
-        if (empty($content)) {
+        if (empty($content) && empty($image)) {
             $_SESSION['content_empty'] = "This post appears to be empty. Please write something or attach a link or photo to post.";
             header("Location: profile.php");
             exit();
         }
-        $query = 'INSERT iNTO posts (user_id, content) VALUES (:user_id, :content);';
-        $values = array(':user_id'=>$username, ':content'=>$content);
-        if (db::query($query, $values)) {
-            header("Location: profile.php?success");
-        } else {
-            echo "ERROR";
+
+        if (empty($image)) {
+            $query = 'INSERT iNTO posts (user_id, content) VALUES (:user_id, :content);';
+            $values = array(':user_id'=>$username, ':content'=>$content);
+            if (db::query($query, $values)) {
+                header("Location: profile.php?");
+                exit();
+            }
+        }
+
+        if (empty($content)) {
+            move_uploaded_file($image_tmp, $directory);
+
+            $query = 'INSERT iNTO posts (user_id, image) VALUES (:user_id, :image);';
+            $values = array(':user_id'=>$username, ':image'=>$image);
+            if (db::query($query, $values)) {
+                header("Location: profile.php?");
+                exit();
+            }
+        }
+
+        if ($content && $image) {
+            move_uploaded_file($image_tmp, $directory);
+
+            $query = 'INSERT iNTO posts (user_id, content, image) VALUES (:user_id, :content, :image);';
+            $values = array(':user_id'=>$username, ':content'=>$content, ':image'=>$image);
+            if (db::query($query, $values)) {
+                header("Location: profile.php?");
+                exit();
+            }
         }
     }
 ?>
@@ -51,7 +77,7 @@
         </form>
     </div>
 
-    <div style="display: flex; margin-top: 8px; justify-content: space-between;">
+    <div style="display: flex; align-items: flex-start; margin-top: 8px; justify-content: space-between;">
         <div style="width: 35%; background-color: #E0E0E0; border-radius: 5px; padding: 16px;">
             <h2>About</h2>
             <p><?php echo $username; ?></p>
@@ -65,8 +91,9 @@
                 <?php }
                 unset($_SESSION['content_empty']);
             ?>
-            <form action="<?php echo 'profile.php?user='.$username; ?>" method="POST" style="display: flex; justify-content: space-between; margin: 8px 0;">
+            <form action="<?php echo 'profile.php?user='.$username; ?>" method="POST" enctype="multipart/form-data" style="display: flex; justify-content: space-between; margin: 8px 0;">
                 <textarea name="content" style="resize: none; width: 80%; padding: 8px;"></textarea>
+                <input id="input" type="file" accept="image/*" name="image">
                 <button name="content-submit" style="width: 15%;">Submit</button>
             </form>
             <!-- POSTS -->
@@ -81,6 +108,10 @@
                         <p><?php echo $post['content']; ?></p>
                         <p>By: <?php echo $post['user_id']; ?></p>
                         <p>On: <?php echo $post['date']; ?></p>
+                        <?php
+                            if ($post['image']) { ?>
+                                <img src='users/posts/<?php  echo $post['image']; ?>' style="width: 100%; height: auto;">
+                            <?php } ?>
                     </div>
 
                 <?php }
