@@ -16,6 +16,25 @@
             header("Location: profile.php");
         }
     }
+
+    if (isset($_POST['content-submit'])) {
+        $content = $_POST['content'];
+
+        echo empty($content);
+
+        if (empty($content)) {
+            $_SESSION['content_empty'] = "This post appears to be empty. Please write something or attach a link or photo to post.";
+            header("Location: profile.php");
+            exit();
+        }
+        $query = 'INSERT iNTO posts (user_id, content) VALUES (:user_id, :content);';
+        $values = array(':user_id'=>$username, ':content'=>$content);
+        if (db::query($query, $values)) {
+            header("Location: profile.php?success");
+        } else {
+            echo "ERROR";
+        }
+    }
 ?>
 <div class="container">
     <div style="display: flex; flex-direction: column; width: 100%; height: 250px; background-position: center; background-size: cover; background-image: url('users/covers/<?php echo $profile_cover; ?>');">
@@ -40,7 +59,32 @@
             <p>Email: <?php echo $email; ?></p>
         </div>
         <div style="width: 60%; background-color: #E0E0E0; border-radius: 5px; padding: 16px;">
-            Main Area
+            <?php
+                if (isset($_SESSION['content_empty'])) { ?>
+                    <p style="padding: 2px; background-color: red; color: white;"><?php echo $_SESSION['content_empty']; ?></p>
+                <?php }
+                unset($_SESSION['content_empty']);
+            ?>
+            <form action="<?php echo 'profile.php?user='.$username; ?>" method="POST" style="display: flex; justify-content: space-between; margin: 8px 0;">
+                <textarea name="content" style="resize: none; width: 80%; padding: 8px;"></textarea>
+                <button name="content-submit" style="width: 15%;">Submit</button>
+            </form>
+            <!-- POSTS -->
+            <?php
+                $query = "SELECT * FROM posts WHERE user_id=:user_id";
+                $values = array(':user_id'=>$username);
+                $result = db::query($query, $values);
+
+                foreach ($result as $post) { ?>
+
+                    <div style="border: 1px solid gray; border-radius: 5px; padding: 8px;">
+                        <p><?php echo $post['content']; ?></p>
+                        <p>By: <?php echo $post['user_id']; ?></p>
+                        <p>On: <?php echo $post['date']; ?></p>
+                    </div>
+
+                <?php }
+            ?>
         </div>
     </div>
 </div>
