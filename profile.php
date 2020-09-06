@@ -61,6 +61,17 @@
             }
         }
     }
+
+    if (isset($_POST['delete-post'])) {
+        $id = $_POST['id'];
+
+        $query = "DELETE FROM posts WHERE id=:id";
+        $values = array('id'=>$id);
+        if (db::query($query, $values)) {
+            header("Location: profile.php?deleeete");
+            exit;
+        }
+    }
 ?>
 <div class="container">
     <div style="display: flex; flex-direction: column; width: 100%; height: 250px; background-position: center; background-size: cover; background-image: url('users/covers/<?php echo $profile_cover; ?>');">
@@ -111,7 +122,12 @@
                         <?php
                             if ($post['image']) { ?>
                                 <img src='users/posts/<?php  echo $post['image']; ?>' style="width: 100%; height: auto;">
-                            <?php } ?>
+                            <?php } 
+                        ?>
+                        <form action="profile.php" method="POST">
+                            <input type="hidden" name="id" value="<?php echo $post['id']; ?>">
+                            <button name="delete-post" style="border: none; padding: 4px 8px; background-color: red; color: white;">Delete</button>
+                        </form>
                     </div>
 
                 <?php }
