@@ -72,7 +72,57 @@
             exit;
         }
     }
+
+    if (isset($_POST['edit-content-submit'])) {
+        $post_id = $_POST['id'];
+        $content = $_POST['edit_content'];
+        $image   = $_FILES['edit_image']['name'];
+        $image_tmp = $_FILES['edit_image']['tmp_name'];
+        $directory = "users/posts/$image";
+
+        if (empty($content) && empty($image)) {
+            $_SESSION['content_empty'] = "This post appears to be empty. Please write something or attach a link or photo to post.";
+            header("Location: profile.php");
+            exit();
+        }
+
+        if (empty($image)) {
+            // "UPDATE data SET name='$name', location='$location' where id=$id";
+            $query = 'UPDATE posts SET content=:edit_content WHERE id=:id';
+            $values = array(':id'=>$post_id, ':edit_content'=>$content);
+            if (db::query($query, $values)) {
+                header("Location: profile.php?");
+                exit();
+            }
+        }
+
+        if (empty($content)) {
+            move_uploaded_file($image_tmp, $directory);
+
+            // $query = 'INSERT iNTO posts (user_id, image) VALUES (:user_id, :image);';
+            $query = 'UPDATE posts SET image=:edit_image WHERE id=:id';
+            $values = array(':id'=>$post_id, ':edit_image'=>$image);
+            if (db::query($query, $values)) {
+                header("Location: profile.php?");
+                exit();
+            }
+        }
+
+        if ($content && $image) {
+            move_uploaded_file($image_tmp, $directory);
+
+            // $query = 'INSERT iNTO posts (user_id, content, image) VALUES (:user_id, :content, :image);';
+            $query = 'UPDATE posts SET content=:edit_content, image=:edit_image WHERE id=:id';
+            $values = array(':id'=>$post_id, ':edit_content'=>$content, ':edit_image'=>$image);
+            if (db::query($query, $values)) {
+                header("Location: profile.php?");
+                exit();
+            }
+        }
+    }
 ?>
+
+
 <div class="container">
     <div style="display: flex; flex-direction: column; width: 100%; height: 250px; background-position: center; background-size: cover; background-image: url('users/covers/<?php echo $profile_cover; ?>');">
         <div style="width: 100%; background-color: rgba(0,0,0,0.5);">
@@ -116,9 +166,23 @@
                 foreach ($result as $post) { ?>
 
                     <div style="border: 1px solid gray; border-radius: 5px; padding: 8px;">
-                        <p><?php echo $post['content']; ?></p>
-                        <p>By: <?php echo $post['user_id']; ?></p>
-                        <p>On: <?php echo $post['date']; ?></p>
+
+                         <!-- HIDDEN -->
+                        <div id="edit-form_<?php echo $post['id']; ?>" style="display: none;">
+                            <form action="<?php echo 'profile.php?user='.$username; ?>" method="POST" enctype="multipart/form-data" style="display: flex; justify-content: space-between; margin: 8px 0;">
+                                <input type="hidden" name="id" value="<?php echo $post['id']; ?>">
+                                <textarea name="edit_content" style="resize: none; width: 80%; padding: 8px;"><?php echo $post['content']; ?></textarea>
+                                <input id="input" type="file" accept="image/*" name="edit_image">
+                                <button name="edit-content-submit" style="width: 15%;">Submit</button>
+                            </form>
+                        </div>
+                        <!-- HIDDEN -->
+
+                        <div id="user-post_<?php echo $post['id']; ?>">
+                            <p><?php echo $post['content']; ?></p>
+                            <p>By: <?php echo $post['user_id']; ?></p>
+                            <p>On: <?php echo $post['date']; ?></p>
+                        </div>
                         <?php
                             if ($post['image']) { ?>
                                 <img src='users/posts/<?php  echo $post['image']; ?>' style="width: 100%; height: auto;">
@@ -128,6 +192,7 @@
                             <input type="hidden" name="id" value="<?php echo $post['id']; ?>">
                             <button name="delete-post" style="border: none; padding: 4px 8px; background-color: red; color: white;">Delete</button>
                         </form>
+                        <p id="edit-button_<?php echo $post['id']; ?>" onclick="myFunction(<?php echo $post['id']; ?>)" style="padding: 8px; background-color: yellow;">Edit</p>
                     </div>
 
                 <?php }
