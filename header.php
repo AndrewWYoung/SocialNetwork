@@ -1,17 +1,5 @@
 <?php
-    session_start();
-    if (isset($_SESSION['email'])) {
-        include "includes/db.inc.php";
-        $query = "SELECT * FROM users WHERE email=:email";
-        $values = array(':email'=>$_SESSION['email']);
-        $result = db::query($query, $values);
-        if ($result) {
-            $username = $result[0]['username'];
-            $email = $result[0]['email'];
-            $registration_date = $result[0]['registration_date'];
-            $profile_cover = $result[0]['profile_cover'];
-        }
-    }
+    include "includes/user_data.inc.php";
 ?>
 
 <!DOCTYPE html>
@@ -50,12 +38,17 @@
             unset($_SESSION['invalid-credentials']);
         } ?>
         <nav class="navbar navbar-dark">
-            <a class="brand" href="#">SocialNetwork</a>
+            <a class="brand" href="feed.php">SocialNetwork</a>
             <?php
                 if (isset($_SESSION['username'])) { ?>
-                    <form action="./includes/logout.inc.php" method="POST">
-                        <button type="submit" name="logout-submit">Logout</button>
-                    </form>
+                    <div style="display: flex;">
+                        <form action="./includes/routes.inc.php" method="POST" style="margin-right: 8px;">
+                            <button type="submit" name="profile-submit">Profile</button>
+                        </form>
+                        <form action="./includes/logout.inc.php" method="POST">
+                            <button type="submit" name="logout-submit">Logout</button>
+                        </form>
+                    </div>
                 <?php } else { ?>
                     <form action="./includes/login.inc.php" method="POST">
                         <input type="email" name="email" placeholder="Email">

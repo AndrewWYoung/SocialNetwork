@@ -13,7 +13,7 @@
 
     <div id="user-post_<?php echo $post['id']; ?>">
     <p><?php echo $post['content']; ?></p>
-    <p>By: <?php echo $post['user_id']; ?></p>
+    <p>By: <a href="profile.php?id=<?php echo $post['user_id']; ?>"><?php echo $post['user_id']; ?></a>
     <p>On: <?php echo $post['date']; ?></p>
     </div>
     <?php
