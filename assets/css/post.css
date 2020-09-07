@@ -1,0 +1,91 @@
+body {
+    background-color: #f1f1f1;
+    font-size: 16px;
+}
+header {
+    background-color: black;
+    color: white;
+    margin-bottom: 16px;
+}
+a {
+    color: black;
+    font-weight: 600;
+}
+a:visited {
+    color: inherit;
+}
+a:hover {
+    color: red;
+}
+form {
+    padding: 0;
+    margin: 0;
+}
+textarea {
+    padding: 8px;
+    border-radius: 10px;
+}
+.card {
+    padding: 16px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+    -webkit-box-shadow: 0px 1px 15px 0px rgba(51, 51, 51, 0.2);
+    box-shadow: 0px 1px 15px 0px rgba(51, 51, 51, 0.2);
+    background-color: white;
+    color: rgb(51, 51, 51);
+}
+.card > img {
+    max-height: 300px;
+    width: auto;
+    height: 100%;
+}
+.profile-image {
+    width: 45px;
+    height: 45px;
+    max-width: 45px;
+    max-height: 45px;
+    border-radius: 50%;
+    margin-right: 16px;
+}
+.card > .author-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+.card > .author-container > .profile-image {
+    width: 45px;
+    height: 45px;
+    max-width: 45px;
+    max-height: 45px;
+    border-radius: 50%;
+    margin-right: 16px;
+}
+.card > .title-container > .author {
+    display: flex;
+    flex-direction: column;
+}
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+}
+.btn {
+    border: 0;
+    padding: 8px 16px;
+}
+.btn-danger {
+    background-color: red;
+    color: white;
+}
+.btn-warning {
+    background-color: yellow;
+    color: white;
+}
+.create-post {
+    margin-bottom: 24px;
+}
+.row {
+    display: flex;
+}
+.space-between {
+    justify-content: space-between;
+}
