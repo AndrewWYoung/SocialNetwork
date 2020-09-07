@@ -73,6 +73,10 @@ textarea {
     border: 0;
     padding: 8px 16px;
 }
+.btn-success {
+    background-color: green;
+    color: white;
+}
 .btn-danger {
     background-color: red;
     color: white;
