@@ -52,7 +52,7 @@
             <p>Registered on: <?php echo ($username == $url_id) ? $registration_date : $profile_registration_date; ?></p>
             <p>Email: <?php echo ($username == $url_id) ? $email : $profile_email; ?></p>
         </div>
-        <div style="width: 60%; background-color: #E0E0E0; border-radius: 5px; padding: 16px;">
+        <div style="width: 60%;">
             <?php
                 if (isset($_SESSION['content_empty'])) { ?>
                     <p style="padding: 2px; background-color: red; color: white;"><?php echo $_SESSION['content_empty']; ?></p>
@@ -60,16 +60,14 @@
                 unset($_SESSION['content_empty']);
             ?>
 
-            <?php if ($username == $url_id) { ?>
-            <form action="includes/create_post.inc.php" method="POST" enctype="multipart/form-data" style="display: flex; justify-content: space-between; margin: 8px 0;">
-                <textarea name="content" style="resize: none; width: 80%; padding: 8px;"></textarea>
-                <input type="hidden" name="url" value="<?php echo $_SERVER['SCRIPT_NAME']; ?>">
-                <input id="input" type="file" accept="image/*" name="image">
-                <button name="content-submit" style="width: 15%;">Submit</button>
-            </form>
-            <?php } ?>
+            <!-- CREATE POST -->
+            <?php 
+                if ($username == $url_id) {
+                    include "components/create_post.component.php";
+                } 
+            ?>
 
-            <!-- POSTS -->
+            <!-- ALL POSTS -->
             <?php
                 $profile_to_search = ($username == $url_id) ? $username : $profile_username;
                 $query = "SELECT * FROM posts WHERE user_id=:user_id ORDER BY date DESC";

@@ -16,7 +16,7 @@
         $content = $_POST['content'];
         $image   = $_FILES['image']['name'];
         $image_tmp = $_FILES['image']['tmp_name'];
-        $directory = "users/posts/$image";
+        $directory = "../users/posts/$image";
 
         if (empty($content) && empty($image)) {
             $_SESSION['content_empty'] = "This post appears to be empty. Please write something or attach a link or photo to post.";
@@ -42,7 +42,9 @@
             $values = array(':user_id'=>$username, ':image'=>$image);
             if (db::query($query, $values)) {
                 // header("Location: profile.php?");
-                header('Location: '.$_POST['url']);
+                echo "$image_tmp <br />";
+                echo "$directory";
+                // header('Location: '.$_POST['url']);
                 exit();
             }
         }
