@@ -1,5 +1,3 @@
-<?php include "header.php"; ?>
-
 <div style="width: 500px; margin: 0 auto">
 
 <?php
@@ -17,5 +15,3 @@
 ?>
 
 </div>
-
-<?php include "footer.php"; ?>
