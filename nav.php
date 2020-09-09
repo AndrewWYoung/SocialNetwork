@@ -11,7 +11,7 @@
     <nav class="navbar navbar-dark">
         <?php
             if (isset($_SESSION['username'])) { ?>
-                <a class="brand" href="feed.php">SocialNetwork</a>
+                <a class="brand" href="index.php">SocialNetwork</a>
                 <div style="display: flex;">
                     <form action="./includes/routes.inc.php" method="POST" style="margin-right: 8px;">
                         <button type="submit" name="profile-submit">Profile</button>
