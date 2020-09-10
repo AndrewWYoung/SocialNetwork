@@ -21,5 +21,6 @@
         }
     } else {
         echo "error";
+        var_dump($_FILES['profile-cover']);
     }
 ?>

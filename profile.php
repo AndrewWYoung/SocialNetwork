@@ -54,25 +54,19 @@
 ?>
 
 <div class="container">
-    <div class="profile-cover" style="background-image: url('users/covers/<?php echo $profile_cover; ?>')">
-        <div style="width: 100%; background-color: rgba(0,0,0,0.5);">
-            <?php if ($username == $url_id) { ?>
-                <p style="text-align: center; color: white; font-size: 1.5rem;">
-                    Welcome, <?php echo $username; ?></p>
-            <?php } ?>
-        </div>
-    </div>
-
-    <?php if ($username == $url_id) { ?>
-    <div style="margin: 8px 0;">
-        <form action="includes/update_profile.inc.php" method="POST"
-                enctype="multipart/form-data">
-                <input type="hidden" name="url" value="<?php echo $_SERVER['SCRIPT_NAME']; ?>">
-                <input id="input" type="file" accept="image/*" name="profile_cover">
-                <button name="cover-update">Update Cover</button>
+    <!-- -->
+    <div class="hero" style="background-image: url('users/covers/<?php echo $profile_cover; ?>')">
+        <?php if ($username == $url_id) { ?>
+        <form id="cover-form" action="includes/update_profile.inc.php" method="POST"
+            enctype="multipart/form-data" style="align-self: flex-end; margin: 24px;">
+            <label class="cover-upload">
+                <h4 style="color: white;">Edit Cover Photo</h4>
+                <input id="cover-input" type="file" accept="image/*" name="profile_cover" style="display: none;">
+                <button id="form-submit" type="submit" name="cover-update" style="display: none;"></button>
+            </label>
         </form>
+        <?php } ?>
     </div>
-    <?php } ?>
 
     <div style="display: flex; align-items: flex-start; margin-top: 8px; justify-content: space-between;">
         <div style="width: 35%;">
