@@ -57,9 +57,18 @@
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         $query = 'INSERT iNTO users (username, password, email, profile_cover) VALUES (:username, :password, :email, :profile_cover);';
         $values = array(':username'=>$username, ':password'=>$hashed_password, ':email'=>$email, ':profile_cover'=>$profile_cover);
+
         if (db::query($query, $values)) {
-            $_SESSION['success'] = "User successfully added!";
+            # If register was success, then search for user and set sessions and redirect for autologin
+            $query = "SELECT * FROM users WHERE email=:email";
+            $values = array(':email'=>$email);
+            $result = db::query($query, $values);
+            if ($result) {
+                $_SESSION['username'] = $result[0]['username'];
+                $_SESSION['email'] = $result[0]['email'];
+            }
             header("Location: ../index.php");
+            exit();
         } else {
             $error_message[] = 'ERROR: User has NOT been added...';
             $_SESSION['error'] = $error_message;
