@@ -33,6 +33,7 @@ top: 70px;
     font-weight: 500;
     font-family: "Times New Roman", Times, serif;
     cursor: pointer;
+    outline: none;
 }
 
 .dropdown-content hr {
