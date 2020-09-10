@@ -53,7 +53,7 @@
             <input type="hidden" name="url" value="<?php echo $_SERVER['SCRIPT_NAME']; ?>">
             <button class="btn btn-danger" name="delete-post">Delete</button>
         </form>
-        <p class="btn btn-edit" id="edit-button_<?php echo $post['id']; ?>" onclick="myFunction(<?php echo $post['id']; ?>)">Edit</p>
+        <p class="btn btn-edit" id="edit-button_<?php echo $post['id']; ?>" onclick="EditPost(<?php echo $post['id']; ?>)">Edit</p>
     <?php } ?>
     </div>
 </div>

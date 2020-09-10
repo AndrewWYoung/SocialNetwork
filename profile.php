@@ -54,8 +54,9 @@
 ?>
 
 <div class="container">
-    <!-- -->
+    <!-- Cover Photo -->
     <div class="hero" style="background-image: url('users/covers/<?php echo $profile_cover; ?>')">
+        <!-- If user is logged in -->
         <?php if ($username == $url_id) { ?>
         <form id="cover-form" action="includes/update_profile.inc.php" method="POST"
             enctype="multipart/form-data" style="align-self: flex-end; margin: 24px;">
