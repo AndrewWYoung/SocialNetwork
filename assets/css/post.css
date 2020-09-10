@@ -81,8 +81,8 @@ textarea {
     background-color: red;
     color: white;
 }
-.btn-warning {
-    background-color: yellow;
+.btn-edit {
+    background-color: darkblue;
     color: white;
 }
 .create-post {
