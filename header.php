@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/profile-page.css">
     <link rel="stylesheet" type="text/css" href="assets/css/post.css">
     <link rel="stylesheet" type="text/css" href="assets/css/menu.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/create_post.css">
 </head>
 <body>
     <?php include "nav.php"; ?>

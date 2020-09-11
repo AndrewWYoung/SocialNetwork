@@ -1,6 +1,7 @@
     <footer>
 
     </footer>
+    <script src="assets/js/modal.js"></script>
     <script>
         function EditPost(id) {
             var form = document.getElementById(`edit-form_${id}`);
@@ -22,10 +23,12 @@
         };
 
         // Menu
+        /*
         document.getElementById("cover-input").onchange = function() {
             console.log("ERERE");
             document.getElementById("cover-form").submit();
         };
+        */
 
         /* When the user clicks on the button, 
         toggle between hiding and showing the dropdown content */
