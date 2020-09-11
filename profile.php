@@ -118,10 +118,18 @@
             ?>
 
             <!-- CREATE POST -->
+            <?php include "components/post_modal.component.php"; ?>
             <?php 
-                if ($username == $url_id) {
-                    include "components/create_post.component.php";
-                } 
+                if ($username == $url_id) { ?>
+                    <!-- Create Post -->
+                    <div class="card">
+                        <div class="row space-between" style="max-width: 100%;" onclick="DisplayPostModal()">
+                            <img class="profile-image" src="users/covers/<?php echo $profile_cover; ?>">
+                            <textarea name="content" style="resize: none; width: 90%; outline: none; border-radius: 25px; height: 35px; padding: 8px 16px;" onclick="DisplayPostModal()"></textarea>
+                        </div>
+                    </div>
+                    <!-- -->
+            <?php } 
             ?>
 
             <!-- ALL POSTS -->
